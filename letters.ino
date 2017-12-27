@@ -139,6 +139,7 @@ void letterRainbowCycle(uint8_t letter) {
 
 
   uint8_t letterOffset = getLetterOffset(letter);
+  uint8_t brightness;
   // clear all pixels
   strip.clear();
 
@@ -148,6 +149,15 @@ void letterRainbowCycle(uint8_t letter) {
       for(uint16_t i=0; i<POINTS_PER_LETTER; i++) {    
         strip.setPixelColor(Alphabet[letterOffset][i], Wheel(((i * 256 / strip.numPixels()) + j) & 255));
       }
+      if(j < 128)
+      {
+        brightness = j;
+      }
+      else
+      {
+        brightness = 255 - j;
+      }
+      strip.setBrightness(brightness);
       strip.show();
       delay(3);
     }
