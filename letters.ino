@@ -64,7 +64,7 @@ void loop() {
   if (Serial.available() > 0)
   {
     //showLetter(Serial.read());
-    letterRainbowCycle(Serial.read());
+    letterRainbowCycle(Serial.read(), 10);
   }
 }
 
@@ -134,7 +134,7 @@ void rainbowCycle(uint8_t wait) {
   }
 }
 
-void letterRainbowCycle(uint8_t letter) {
+void letterRainbowCycle(uint8_t letter, uint8_t wait) {
   uint16_t i, j;
 
 
@@ -159,7 +159,7 @@ void letterRainbowCycle(uint8_t letter) {
       }
       strip.setBrightness(brightness);
       strip.show();
-      delay(3);
+      delay(wait);
     }
 
   }
