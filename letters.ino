@@ -63,8 +63,8 @@ void setup() {
 void loop() {
   if (Serial.available() > 0)
   {
-    showLetter(Serial.read());
-    delay(1000);
+    //showLetter(Serial.read());
+    letterRainbowCycle(Serial.read());
   }
 }
 
@@ -84,8 +84,6 @@ void showLetter(uint8_t letter)
       strip.setPixelColor(Alphabet[letterOffset][i], strip.Color(255, 0, 0));
     }
   }
-  Serial.print(letter);
-  Serial.print(letterOffset);
   strip.show();
 }
 
@@ -134,6 +132,29 @@ void rainbowCycle(uint8_t wait) {
     strip.show();
     delay(wait);
   }
+}
+
+void letterRainbowCycle(uint8_t letter) {
+  uint16_t i, j;
+
+
+  uint8_t letterOffset = getLetterOffset(letter);
+  // clear all pixels
+  strip.clear();
+
+  if(letterOffset != 255)
+  {
+    for(j=0; j<256; j++) { //  all colors on wheel
+      for(uint16_t i=0; i<POINTS_PER_LETTER; i++) {    
+        strip.setPixelColor(Alphabet[letterOffset][i], Wheel(((i * 256 / strip.numPixels()) + j) & 255));
+      }
+      strip.show();
+      delay(3);
+    }
+
+  }
+  strip.show();
+
 }
 
 // Slightly different, this makes the rainbow equally distributed throughout
