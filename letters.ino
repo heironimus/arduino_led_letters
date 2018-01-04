@@ -64,7 +64,7 @@ void loop() {
   if (Serial.available() > 0)
   {
     //showLetter(Serial.read());
-    letterRainbowCycle(Serial.read(), 5);
+    letterRainbowCycle(Serial.read(), 2);
   }
 }
 
